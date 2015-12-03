@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+	<h3>Login</h3>
+	<form id="form" onsubmit="return false;">
+		Usuario: <input type="text" name="usuario" id="usuario" /> <br />
+		Password:<input type="password" name="password" id="password" /> <br />
+		<input type="submit" value="Login" id="login">
+	</form>
+</body>
+<script type="text/javascript">
+	$('#login').click(function() {
+		var usuario = $('#usuario').val();
+		var password = $('#password').val();
+		$.ajax({
+			url : "LoginServlet",
+			type : "post",
+			data : {
+				"usuario" : usuario,
+				"password" : password
+			},
+			success : function(result, status, jqXHR) {
+				$(location).attr('href', 'LoginSuccess.jsp');
+			},
+			error : function(data, errorThrown) {
+				alert("Error...");
+			}
+		});
+	});
+</script>
+</html>
